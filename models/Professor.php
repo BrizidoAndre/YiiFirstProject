@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $materia
  * @property int $idLogin
+ *
  */
 class Professor extends \yii\db\ActiveRecord
 {
@@ -41,7 +42,17 @@ class Professor extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'materia' => 'Materia',
-            'idLogin' => 'Id Login',
+            'idLogin' => 'Professor',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuario()
+    {
+        return $this->hasOne(Usuario::class,['id' => 'idLogin']);
+    }
+
+
 }

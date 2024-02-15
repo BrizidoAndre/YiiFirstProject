@@ -71,7 +71,7 @@ class UsuarioController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['usuario/index']);
             }
         } else {
             $model->loadDefaultValues();
@@ -94,7 +94,7 @@ class UsuarioController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['usuario/index']);
         }
 
         return $this->render('update', [

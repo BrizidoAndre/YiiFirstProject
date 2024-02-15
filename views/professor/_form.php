@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+
 /** @var yii\web\View $this */
 /** @var app\models\Professor $model */
 /** @var yii\widgets\ActiveForm $form */
@@ -14,10 +15,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'materia')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'idLogin')->textInput() ?>
+    <?php  $models = \app\models\Usuario::find()->orderBy("nome")->all()                         ?>
+
+    <?php  $map = \yii\helpers\ArrayHelper::map($models,'id', 'nome')                         ?>
+
+    <?= $form->field($model, 'idLogin')->dropDownList($map, ['prompt' => 'Selecione um Usuário'])?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

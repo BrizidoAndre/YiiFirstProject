@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var app\models\ProfessorSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Professors';
+$this->title = 'Professores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="professor-index">
@@ -31,12 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'materia',
-            'idLogin',
             [
-                'class' => ActionColumn::className(),
+                "attribute" => 'idLogin',
+                'value' => 'nome'
+            ],
+            [
+                'class' => ActionColumn::class,
                 'urlCreator' => function ($action, Professor $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

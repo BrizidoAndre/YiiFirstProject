@@ -28,7 +28,8 @@ class Usuario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['login', 'senha', 'nome'], 'required'],
+            [['login', 'senha'], 'required', 'message' => 'Por favor preencha todos os campos'],
+            [['nome'], 'required', 'message' => 'O nome não está preenchido'],
             [['login', 'senha', 'nome'], 'string', 'max' => 50],
         ];
     }
@@ -40,7 +41,7 @@ class Usuario extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'login' => 'Login',
+            'login' => 'Email',
             'senha' => 'Senha',
             'nome' => 'Nome',
         ];

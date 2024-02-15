@@ -11,14 +11,19 @@ use app\models\Professor;
  */
 class ProfessorSearch extends Professor
 {
+    public function attributes(){
+        return array_merge(parent::attributes(), ["usuario.nome"]);
+    }
+
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'idLogin'], 'integer'],
-            [['materia'], 'safe'],
+            [['id', ], 'integer'],
+            [['materia','usuario.nome'], 'safe'],
         ];
     }
 
@@ -47,6 +52,11 @@ class ProfessorSearch extends Professor
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $query->joinWith(['usuario']);
+        $dataProvider->sort->attributes['usuario.nome']=[
+            'asc' => ['usuario.nome'=>SORT_ASC],
+            'desc' => ['usuario.nome' =>SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -63,6 +73,7 @@ class ProfessorSearch extends Professor
         ]);
 
         $query->andFilterWhere(['like', 'materia', $this->materia]);
+        $query->andFilterWhere(['like', 'usuario.nome', $this->getAttribute('usuario.nome')]);
 
         return $dataProvider;
     }
